@@ -1,329 +1,396 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  AlertTriangle, 
-  X, 
-  MapPin, 
-  User, 
-  FileWarning, 
-  Eye, 
-  Siren, 
-  Fingerprint, 
-  ChevronDown 
-} from 'lucide-react';
-
-const LandingPage = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  // Efeito de scroll para a navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Imagem de Topo
-  const topImage = "https://i.postimg.cc/0QdNK6ft/hjghj.png";
-
-  // Dados das Imagens
-  const items = [
-    { id: 1, src: "https://i.postimg.cc/1f6vJKgp/fghfgh.png", title: "EVIDÊNCIA #01" },
-    { id: 2, src: "https://i.postimg.cc/14bWGdzF/fghh.png", title: "EVIDÊNCIA #02" },
-    { id: 3, src: "https://i.postimg.cc/s1bnYL2M/fght.png", title: "EVIDÊNCIA #03" },
-    { id: 4, src: "https://i.postimg.cc/qgWmsF78/fghtrhy.png", title: "EVIDÊNCIA #04" },
-    { id: 5, src: "https://i.postimg.cc/6TFHrPQ0/fhfgh.png", title: "EVIDÊNCIA #05" },
-    { id: 6, src: "https://i.postimg.cc/6TFHrPQ4/ghfhrt.png", title: "EVIDÊNCIA #06" },
-    { id: 7, src: "https://i.postimg.cc/TpmtCcyV/hgfhfgh.png", title: "EVIDÊNCIA #07" },
-    { id: 8, src: "https://i.postimg.cc/xqXxbQ9Q/rtertert.png", title: "EVIDÊNCIA #08" },
-  ];
-
-  // Texto Genérico para Edição
-  const placeholderText = `
-    [INSIRA SEU TEXTO AQUI]
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossiê: Mãe e Filho</title>
     
-    Este é um espaço reservado para a descrição detalhada dos fatos. Edite este parágrafo para relatar a situação de irresponsabilidade observada. Descreva as circunstâncias, horários e detalhes pertinentes às imagens apresentadas ao lado.
+    <!-- Carregando Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Carregando React e ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Carregando Babel para traduzir o JSX no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    A gravidade da situação exige atenção imediata. Utilize este espaço para argumentar e expor os pontos críticos que fundamentam esta denúncia pública. O layout foi construído para suportar textos longos sem quebrar a harmonia visual da página.
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac odio et velit scelerisque suscipit. 
-  `;
-
-  return (
-    <div className="min-h-screen bg-black text-green-500 font-mono selection:bg-green-500 selection:text-black overflow-x-hidden">
-      
-      {/* Navbar Flutuante */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 border-b border-green-500 shadow-[0_0_20px_rgba(0,255,0,0.3)] py-2' : 'bg-transparent py-4'}`}>
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-2 animate-pulse">
-            <Siren className="w-6 h-6 text-red-500" />
-            <span className="text-xl font-bold tracking-widest text-white uppercase glitch-text">ALERTA MÁXIMO</span>
-          </div>
-          <button 
-            onClick={() => setShowModal(true)}
-            className="bg-green-600 hover:bg-green-500 text-black font-bold py-2 px-6 rounded-none border border-green-400 hover:shadow-[0_0_15px_#00ff00] transition-all duration-300 uppercase text-sm tracking-wider"
-          >
-            Verificar Status
-          </button>
-        </div>
-      </nav>
-
-      {/* Hero Section com Imagem de Topo */}
-      <header className="relative w-full pt-20">
-        <div className="relative w-full border-b-2 border-green-500">
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-          <img 
-            src={topImage} 
-            alt="Topo" 
-            className="w-full max-h-[70vh] object-contain mx-auto opacity-90"
-          />
-          <div className="absolute bottom-10 left-0 right-0 z-20 text-center">
-            <h1 className="text-4xl md:text-6xl font-black text-white uppercase drop-shadow-[0_0_10px_rgba(0,255,0,0.8)] mb-4">
-              Dossiê: <span className="text-green-500">Mãe e Filho</span>
-            </h1>
-            <p className="text-green-400 text-lg md:text-xl font-bold tracking-[0.2em] blink-animation">
-              RELATÓRIO DE IRRESPONSABILIDADE
-            </p>
-            <div className="mt-8">
-              <ChevronDown className="w-10 h-10 text-green-500 mx-auto animate-bounce" />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Faixa de Alerta */}
-      <div className="bg-green-600 text-black py-3 font-bold text-center overflow-hidden whitespace-nowrap border-y-4 border-black">
-        <div className="inline-block animate-marquee">
-          ATENÇÃO: CONTEÚDO SENSÍVEL /// LEIA COM ATENÇÃO /// DENÚNCIA PÚBLICA /// COMPARTILHE /// ATENÇÃO: CONTEÚDO SENSÍVEL ///
-        </div>
-      </div>
-
-      <main className="max-w-7xl mx-auto px-4 py-16 space-y-32">
-        
-        {/* Intro */}
-        <section className="text-center max-w-4xl mx-auto border border-green-500/30 p-8 bg-neutral-900/50 relative">
-          <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-green-500"></div>
-          <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-green-500"></div>
-          <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-green-500"></div>
-          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-green-500"></div>
-          
-          <h2 className="text-3xl font-bold text-white mb-6 uppercase">Sobre o Caso</h2>
-          <p className="text-gray-400 text-lg leading-relaxed font-sans">
-            Abaixo constam as provas visuais e descritivas sobre o caso de Fabiene e Iuri. 
-            Analise cada registro com cautela. A verdade está nos detalhes.
-          </p>
-        </section>
-
-        {/* Galeria de Evidências */}
-        <div className="space-y-24">
-          {items.map((item, index) => (
-            <article 
-              key={item.id} 
-              className={`relative flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-0 group`}
-            >
-              {/* Conector Visual (Linha no meio) */}
-              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-green-900 -translate-x-1/2 group-last:bottom-auto group-last:h-full"></div>
-              
-              {/* Container Imagem */}
-              <div className="lg:w-1/2 relative p-4">
-                <div className="relative border-2 border-green-500 bg-black p-1 shadow-[0_0_15px_rgba(0,255,0,0.1)] group-hover:shadow-[0_0_30px_rgba(0,255,0,0.4)] transition-all duration-500">
-                  {/* Cantos Decorativos */}
-                  <div className="absolute -top-1 -left-1 w-6 h-6 bg-green-500 z-10 clip-corner"></div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 z-10 clip-corner-inverse"></div>
-                  
-                  {/* Container da Imagem ajustado para tamanho original (limitado pela tela) */}
-                  <div className="relative overflow-hidden bg-black/20 flex justify-center items-center">
-                    <img 
-                      src={item.src} 
-                      alt={item.title} 
-                      className="w-auto h-auto max-w-full max-h-[85vh] object-contain mx-auto"
-                    />
-                  </div>
-                  
-                  <div className="bg-green-900/20 p-3 border-t border-green-500/50 flex justify-between items-center">
-                    <span className="font-bold text-white uppercase">{item.title}</span>
-                    <Eye className="w-5 h-5 text-green-500" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Container Texto */}
-              <div className="lg:w-1/2 p-4 flex flex-col justify-center">
-                <div className="bg-neutral-900/80 border border-green-500/30 p-6 relative hover:bg-neutral-900 transition-colors duration-300">
-                  <div className="flex items-center gap-2 mb-4 border-b border-green-500/30 pb-2">
-                    <FileWarning className="w-5 h-5 text-red-500" />
-                    <h3 className="text-xl font-bold text-white uppercase">Relatório Descritivo</h3>
-                  </div>
-                  
-                  <div className="h-64 overflow-y-auto pr-4 custom-scrollbar font-sans text-gray-300 text-sm leading-relaxed text-justify">
-                    {placeholderText.split('\n').map((line, i) => (
-                      <p key={i} className="mb-3">{line}</p>
-                    ))}
-                  </div>
-
-                  <button className="mt-4 w-full border border-green-500 text-green-500 hover:bg-green-500 hover:text-black py-2 uppercase text-xs font-bold tracking-widest transition-all">
-                    Expandir Análise
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
-      </main>
-
-      {/* Footer / Ficha Criminal Style */}
-      <footer className="bg-black border-t-8 border-green-600 pt-16 pb-8 px-4 relative mt-20">
-        <div className="max-w-4xl mx-auto border-2 border-green-500 p-8 relative bg-neutral-950">
-          
-          {/* Carimbo "CONFIDENCIAL" */}
-          <div className="absolute -top-6 -right-6 md:right-10 border-4 border-red-600 text-red-600 font-black text-2xl px-6 py-2 rotate-12 bg-black/50 backdrop-blur-sm z-10">
-            REGISTRADO
-          </div>
-
-          <div className="text-center mb-10">
-            <Fingerprint className="w-16 h-16 text-green-500 mx-auto mb-4 animate-pulse" />
-            <h4 className="text-3xl font-black text-white uppercase tracking-widest glitch-text">Ficha de Identificação</h4>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono">
-            {/* Coluna 1 */}
-            <div className="space-y-6">
-              <div className="border border-green-900 p-4 bg-black/50">
-                <label className="text-xs text-green-600 block mb-1 uppercase">Nome da Mãe</label>
-                <div className="text-white text-lg font-bold border-b border-green-500/50 pb-1">
-                  Fabiene Pitanga de Souza Lima
-                </div>
-              </div>
-
-              <div className="border border-green-900 p-4 bg-black/50">
-                <label className="text-xs text-green-600 block mb-1 uppercase">Filho</label>
-                <div className="text-white text-lg font-bold border-b border-green-500/50 pb-1">
-                  Iuri
-                </div>
-              </div>
-            </div>
-
-            {/* Coluna 2 */}
-            <div className="space-y-6">
-              <div className="border border-green-900 p-4 bg-black/50">
-                <label className="text-xs text-green-600 block mb-1 uppercase">Localização</label>
-                <div className="flex items-start gap-2 text-gray-300 text-sm">
-                  <MapPin className="w-4 h-4 text-green-500 mt-1 shrink-0" />
-                  <div>
-                    <p>Rua Pracinha Dionísio Chagas, 95</p>
-                    <p>Pitangueiras, Rio de Janeiro/RJ</p>
-                    <p className="text-green-500 font-bold mt-1">CEP: 21930-240</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border border-green-900 p-4 bg-black/50">
-                <label className="text-xs text-green-600 block mb-1 uppercase">Documentação</label>
-                <div className="space-y-2 text-sm text-gray-400">
-                  <div className="flex justify-between border-b border-gray-800 pb-1">
-                    <span>CPF:</span>
-                    <span className="text-white font-bold tracking-widest">081.356.397-67</span>
-                  </div>
-                  <div className="flex justify-between border-b border-gray-800 pb-1">
-                    <span>Identidade:</span>
-                    <span className="text-white font-bold tracking-widest">12.299.288-6</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-8 text-center">
-             <p className="text-red-500 text-xs uppercase font-bold">
-               * Dados fornecidos conforme solicitação do usuário.
-             </p>
-          </div>
-        </div>
-
-        <div className="text-center mt-16 text-green-900 text-xs uppercase tracking-widest">
-          Sistema de Monitoramento v2.0.4 // Conexão Segura
-        </div>
-      </footer>
-
-      {/* MODAL POPUP */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-neutral-900 border-2 border-green-500 w-full max-w-lg relative p-8 shadow-[0_0_50px_rgba(0,255,0,0.2)] animate-in fade-in zoom-in duration-300">
-            <button 
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-green-500 hover:text-white transition-colors"
-            >
-              <X className="w-8 h-8" />
-            </button>
-
-            <div className="text-center mb-6">
-              <AlertTriangle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white uppercase">Status da Ocorrência</h3>
-            </div>
-            
-            <div className="space-y-4 text-gray-300 font-sans">
-              <p>
-                Este registro foi criado para documentar e expor fatos relacionados à irresponsabilidade parental.
-              </p>
-              <p>
-                Todas as evidências apresentadas nesta página são autênticas. O objetivo é alertar e registrar publicamente os acontecimentos.
-              </p>
-              <div className="bg-black p-4 border border-green-900 text-green-400 font-mono text-sm mt-4">
-                &gt; ACESSO PÚBLICO: LIBERADO<br/>
-                &gt; EVIDÊNCIAS: 8 ARQUIVOS<br/>
-                &gt; LOCALIZAÇÃO: CONFIRMADA
-              </div>
-            </div>
-
-            <button 
-              onClick={() => setShowModal(false)}
-              className="w-full mt-8 bg-green-600 hover:bg-green-500 text-black font-bold py-3 uppercase tracking-widest transition-all"
-            >
-              Entendido
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Styles Injetados */}
-      <style>{`
+    <!-- Configurações adicionais do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            900: '#14532d',
+                        }
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos personalizados que não estão no Tailwind */
+        body {
+            background-color: #000;
+            color: #22c55e;
+        }
         @keyframes marquee {
-          0% { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         .animate-marquee {
-          animation: marquee 20s linear infinite;
+            animation: marquee 20s linear infinite;
         }
         .glitch-text {
-          text-shadow: 2px 0 #ff0000, -2px 0 #0000ff;
+            text-shadow: 2px 0 #ff0000, -2px 0 #0000ff;
         }
         .blink-animation {
-          animation: blink 1.5s infinite;
+            animation: blink 1.5s infinite;
         }
         @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
+            width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #000;
+            background: #000;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #22c55e;
+            background: #22c55e;
+            border-radius: 3px;
         }
         .clip-corner {
-          clip-path: polygon(0 0, 100% 0, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
         }
         .clip-corner-inverse {
-          clip-path: polygon(100% 100%, 100% 0, 0 100%);
+            clip-path: polygon(100% 100%, 100% 0, 0 100%);
         }
-      `}</style>
-    </div>
-  );
-};
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-export default LandingPage;
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- ÍCONES SVG (Substituindo Lucide-React para funcionar sem build) ---
+        const AlertTriangle = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        );
+        const X = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 18 12"/></svg>
+        );
+        const MapPin = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        );
+        const User = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        );
+        const FileWarning = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        );
+        const Eye = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        );
+        const Siren = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2H5v2Z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.929 4.929.707.707"/><path d="M12 12v6"/></svg>
+        );
+        const Fingerprint = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 15a9 9 0 0 1-9 9"/><path d="M12 3a9 9 0 0 0-9 9"/><path d="M12 6a6 6 0 0 0-6 6"/><path d="M12 18a6 6 0 0 1-6-6"/><path d="M12 6v4"/><path d="M12 21v-3"/></svg>
+        );
+        const ChevronDown = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m6 9 6 6 6-6"/></svg>
+        );
+
+        // --- COMPONENTE PRINCIPAL ---
+        const LandingPage = () => {
+            const [showModal, setShowModal] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const topImage = "https://i.postimg.cc/0QdNK6ft/hjghj.png";
+
+            const items = [
+                { id: 1, src: "https://i.postimg.cc/1f6vJKgp/fghfgh.png", title: "EVIDÊNCIA #01" },
+                { id: 2, src: "https://i.postimg.cc/14bWGdzF/fghh.png", title: "EVIDÊNCIA #02" },
+                { id: 3, src: "https://i.postimg.cc/s1bnYL2M/fght.png", title: "EVIDÊNCIA #03" },
+                { id: 4, src: "https://i.postimg.cc/qgWmsF78/fghtrhy.png", title: "EVIDÊNCIA #04" },
+                { id: 5, src: "https://i.postimg.cc/6TFHrPQ0/fhfgh.png", title: "EVIDÊNCIA #05" },
+                { id: 6, src: "https://i.postimg.cc/6TFHrPQ4/ghfhrt.png", title: "EVIDÊNCIA #06" },
+                { id: 7, src: "https://i.postimg.cc/TpmtCcyV/hgfhfgh.png", title: "EVIDÊNCIA #07" },
+                { id: 8, src: "https://i.postimg.cc/xqXxbQ9Q/rtertert.png", title: "EVIDÊNCIA #08" },
+            ];
+
+            const placeholderText = `
+                [INSIRA SEU TEXTO AQUI]
+                
+                Este é um espaço reservado para a descrição detalhada dos fatos. Edite este parágrafo para relatar a situação de irresponsabilidade observada. Descreva as circunstâncias, horários e detalhes pertinentes às imagens apresentadas ao lado.
+
+                A gravidade da situação exige atenção imediata. Utilize este espaço para argumentar e expor os pontos críticos que fundamentam esta denúncia pública. O layout foi construído para suportar textos longos sem quebrar a harmonia visual da página.
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac odio et velit scelerisque suscipit. 
+            `;
+
+            return (
+                <div className="min-h-screen bg-black text-green-500 font-mono selection:bg-green-500 selection:text-black overflow-x-hidden">
+                
+                {/* Navbar Flutuante */}
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 border-b border-green-500 shadow-[0_0_20px_rgba(0,255,0,0.3)] py-2' : 'bg-transparent py-4'}`}>
+                    <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+                    <div className="flex items-center gap-2 animate-pulse">
+                        <Siren className="w-6 h-6 text-red-500" />
+                        <span className="text-xl font-bold tracking-widest text-white uppercase glitch-text">ALERTA MÁXIMO</span>
+                    </div>
+                    <button 
+                        onClick={() => setShowModal(true)}
+                        className="bg-green-600 hover:bg-green-500 text-black font-bold py-2 px-6 rounded-none border border-green-400 hover:shadow-[0_0_15px_#00ff00] transition-all duration-300 uppercase text-sm tracking-wider"
+                    >
+                        Verificar Status
+                    </button>
+                    </div>
+                </nav>
+
+                {/* Hero Section com Imagem de Topo */}
+                <header className="relative w-full pt-20">
+                    <div className="relative w-full border-b-2 border-green-500">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                    <img 
+                        src={topImage} 
+                        alt="Topo" 
+                        className="w-full max-h-[70vh] object-contain mx-auto opacity-90"
+                    />
+                    <div className="absolute bottom-10 left-0 right-0 z-20 text-center">
+                        <h1 className="text-4xl md:text-6xl font-black text-white uppercase drop-shadow-[0_0_10px_rgba(0,255,0,0.8)] mb-4">
+                        Dossiê: <span className="text-green-500">Mãe e Filho</span>
+                        </h1>
+                        <p className="text-green-400 text-lg md:text-xl font-bold tracking-[0.2em] blink-animation">
+                        RELATÓRIO DE IRRESPONSABILIDADE
+                        </p>
+                        <div className="mt-8">
+                        <ChevronDown className="w-10 h-10 text-green-500 mx-auto animate-bounce" />
+                        </div>
+                    </div>
+                    </div>
+                </header>
+
+                {/* Faixa de Alerta */}
+                <div className="bg-green-600 text-black py-3 font-bold text-center overflow-hidden whitespace-nowrap border-y-4 border-black">
+                    <div className="inline-block animate-marquee">
+                    ATENÇÃO: CONTEÚDO SENSÍVEL /// LEIA COM ATENÇÃO /// DENÚNCIA PÚBLICA /// COMPARTILHE /// ATENÇÃO: CONTEÚDO SENSÍVEL ///
+                    </div>
+                </div>
+
+                <main className="max-w-7xl mx-auto px-4 py-16 space-y-32">
+                    
+                    {/* Intro */}
+                    <section className="text-center max-w-4xl mx-auto border border-green-500/30 p-8 bg-neutral-900/50 relative">
+                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-green-500"></div>
+                    <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-green-500"></div>
+                    <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-green-500"></div>
+                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-green-500"></div>
+                    
+                    <h2 className="text-3xl font-bold text-white mb-6 uppercase">Sobre o Caso</h2>
+                    <p className="text-gray-400 text-lg leading-relaxed font-sans">
+                        Abaixo constam as provas visuais e descritivas sobre o caso de Fabiene e Iuri. 
+                        Analise cada registro com cautela. A verdade está nos detalhes.
+                    </p>
+                    </section>
+
+                    {/* Galeria de Evidências */}
+                    <div className="space-y-24">
+                    {items.map((item, index) => (
+                        <article 
+                        key={item.id} 
+                        className={`relative flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-0 group`}
+                        >
+                        {/* Conector Visual (Linha no meio) */}
+                        <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-green-900 -translate-x-1/2 group-last:bottom-auto group-last:h-full"></div>
+                        
+                        {/* Container Imagem */}
+                        <div className="lg:w-1/2 relative p-4">
+                            <div className="relative border-2 border-green-500 bg-black p-1 shadow-[0_0_15px_rgba(0,255,0,0.1)] group-hover:shadow-[0_0_30px_rgba(0,255,0,0.4)] transition-all duration-500">
+                            {/* Cantos Decorativos */}
+                            <div className="absolute -top-1 -left-1 w-6 h-6 bg-green-500 z-10 clip-corner"></div>
+                            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 z-10 clip-corner-inverse"></div>
+                            
+                            {/* Container da Imagem ajustado para tamanho original (limitado pela tela) */}
+                            <div className="relative overflow-hidden bg-black/20 flex justify-center items-center">
+                                <img 
+                                src={item.src} 
+                                alt={item.title} 
+                                className="w-auto h-auto max-w-full max-h-[85vh] object-contain mx-auto"
+                                />
+                            </div>
+                            
+                            <div className="bg-green-900/20 p-3 border-t border-green-500/50 flex justify-between items-center">
+                                <span className="font-bold text-white uppercase">{item.title}</span>
+                                <Eye className="w-5 h-5 text-green-500" />
+                            </div>
+                            </div>
+                        </div>
+
+                        {/* Container Texto */}
+                        <div className="lg:w-1/2 p-4 flex flex-col justify-center">
+                            <div className="bg-neutral-900/80 border border-green-500/30 p-6 relative hover:bg-neutral-900 transition-colors duration-300">
+                            <div className="flex items-center gap-2 mb-4 border-b border-green-500/30 pb-2">
+                                <FileWarning className="w-5 h-5 text-red-500" />
+                                <h3 className="text-xl font-bold text-white uppercase">Relatório Descritivo</h3>
+                            </div>
+                            
+                            <div className="h-64 overflow-y-auto pr-4 custom-scrollbar font-sans text-gray-300 text-sm leading-relaxed text-justify">
+                                {placeholderText.split('\n').map((line, i) => (
+                                <p key={i} className="mb-3">{line}</p>
+                                ))}
+                            </div>
+
+                            <button className="mt-4 w-full border border-green-500 text-green-500 hover:bg-green-500 hover:text-black py-2 uppercase text-xs font-bold tracking-widest transition-all">
+                                Expandir Análise
+                            </button>
+                            </div>
+                        </div>
+                        </article>
+                    ))}
+                    </div>
+
+                </main>
+
+                {/* Footer / Ficha Criminal Style */}
+                <footer className="bg-black border-t-8 border-green-600 pt-16 pb-8 px-4 relative mt-20">
+                    <div className="max-w-4xl mx-auto border-2 border-green-500 p-8 relative bg-neutral-950">
+                    
+                    {/* Carimbo "CONFIDENCIAL" */}
+                    <div className="absolute -top-6 -right-6 md:right-10 border-4 border-red-600 text-red-600 font-black text-2xl px-6 py-2 rotate-12 bg-black/50 backdrop-blur-sm z-10">
+                        REGISTRADO
+                    </div>
+
+                    <div className="text-center mb-10">
+                        <Fingerprint className="w-16 h-16 text-green-500 mx-auto mb-4 animate-pulse" />
+                        <h4 className="text-3xl font-black text-white uppercase tracking-widest glitch-text">Ficha de Identificação</h4>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono">
+                        {/* Coluna 1 */}
+                        <div className="space-y-6">
+                        <div className="border border-green-900 p-4 bg-black/50">
+                            <label className="text-xs text-green-600 block mb-1 uppercase">Nome da Mãe</label>
+                            <div className="text-white text-lg font-bold border-b border-green-500/50 pb-1">
+                            Fabiene Pitanga de Souza Lima
+                            </div>
+                        </div>
+
+                        <div className="border border-green-900 p-4 bg-black/50">
+                            <label className="text-xs text-green-600 block mb-1 uppercase">Filho</label>
+                            <div className="text-white text-lg font-bold border-b border-green-500/50 pb-1">
+                            Iuri
+                            </div>
+                        </div>
+                        </div>
+
+                        {/* Coluna 2 */}
+                        <div className="space-y-6">
+                        <div className="border border-green-900 p-4 bg-black/50">
+                            <label className="text-xs text-green-600 block mb-1 uppercase">Localização</label>
+                            <div className="flex items-start gap-2 text-gray-300 text-sm">
+                            <MapPin className="w-4 h-4 text-green-500 mt-1 shrink-0" />
+                            <div>
+                                <p>Rua Pracinha Dionísio Chagas, 95</p>
+                                <p>Pitangueiras, Rio de Janeiro/RJ</p>
+                                <p className="text-green-500 font-bold mt-1">CEP: 21930-240</p>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div className="border border-green-900 p-4 bg-black/50">
+                            <label className="text-xs text-green-600 block mb-1 uppercase">Documentação</label>
+                            <div className="space-y-2 text-sm text-gray-400">
+                            <div className="flex justify-between border-b border-gray-800 pb-1">
+                                <span>CPF:</span>
+                                <span className="text-white font-bold tracking-widest">081.356.397-67</span>
+                            </div>
+                            <div className="flex justify-between border-b border-gray-800 pb-1">
+                                <span>Identidade:</span>
+                                <span className="text-white font-bold tracking-widest">12.299.288-6</span>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-8 text-center">
+                        <p className="text-red-500 text-xs uppercase font-bold">
+                        * Dados fornecidos conforme solicitação do usuário.
+                        </p>
+                    </div>
+                    </div>
+
+                    <div className="text-center mt-16 text-green-900 text-xs uppercase tracking-widest">
+                    Sistema de Monitoramento v2.0.4 // Conexão Segura
+                    </div>
+                </footer>
+
+                {/* MODAL POPUP */}
+                {showModal && (
+                    <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
+                    <div className="bg-neutral-900 border-2 border-green-500 w-full max-w-lg relative p-8 shadow-[0_0_50px_rgba(0,255,0,0.2)] animate-in fade-in zoom-in duration-300">
+                        <button 
+                        onClick={() => setShowModal(false)}
+                        className="absolute top-4 right-4 text-green-500 hover:text-white transition-colors"
+                        >
+                        <X className="w-8 h-8" />
+                        </button>
+
+                        <div className="text-center mb-6">
+                        <AlertTriangle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                        <h3 className="text-2xl font-bold text-white uppercase">Status da Ocorrência</h3>
+                        </div>
+                        
+                        <div className="space-y-4 text-gray-300 font-sans">
+                        <p>
+                            Este registro foi criado para documentar e expor fatos relacionados à irresponsabilidade parental.
+                        </p>
+                        <p>
+                            Todas as evidências apresentadas nesta página são autênticas. O objetivo é alertar e registrar publicamente os acontecimentos.
+                        </p>
+                        <div className="bg-black p-4 border border-green-900 text-green-400 font-mono text-sm mt-4">
+                            &gt; ACESSO PÚBLICO: LIBERADO<br/>
+                            &gt; EVIDÊNCIAS: 8 ARQUIVOS<br/>
+                            &gt; LOCALIZAÇÃO: CONFIRMADA
+                        </div>
+                        </div>
+
+                        <button 
+                        onClick={() => setShowModal(false)}
+                        className="w-full mt-8 bg-green-600 hover:bg-green-500 text-black font-bold py-3 uppercase tracking-widest transition-all"
+                        >
+                        Entendido
+                        </button>
+                    </div>
+                    </div>
+                )}
+                </div>
+            );
+        };
+
+        // Renderizando o componente
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LandingPage />);
+    </script>
+</body>
+</html>
